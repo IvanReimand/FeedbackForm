@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8">
+  <title>(Un)Official TPT feedback form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 200px;
+      margin-top: auto;
+      background-color: rgb(240, 228, 194);
+    }
+    .EDASI{
+      width: 1000px;
+      height: 100px;
+      color: rgb(0, 0, 0);
+      background-color: rgb(255, 255, 255);
+      border-radius: 2rem;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 107rem;
+    }
+    .userInput{
+            width: 1000px;
+      height: 100px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <input type="text" id="userInput" placeholder="Введите что-нибудь..." />
+  <ul id="list"></ul>
+
+
+ 
+  <script>
+    const input = document.getElementById('userInput');
+    const list = document.getElementById('list');
+ 
+    // Обработка нажатия Enter
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        const value = input.value.trim();
+        if (value !== '') {
+          // 1. Добавим в список на странице
+          const li = document.createElement('li');
+          li.textContent = value;
+          list.appendChild(li);
+ 
+          // 2. Сохраним в localStorage
+          const saved = JSON.parse(localStorage.getItem('entries')) || [];
+          saved.push(value);
+          localStorage.setItem('entries', JSON.stringify(saved));
+ 
+          // 3. Очистим поле ввода
+          input.value = '';
+        }
+      }
+    });
+ 
+    // При загрузке страницы восстановим данные
+    window.addEventListener('load', () => {
+      const saved = JSON.parse(localStorage.getItem('entries')) || [];
+      saved.forEach(value => {
+        const li = document.createElement('li');
+        li.textContent = value;
+        list.appendChild(li);
+      });
+    });
+  </script>
+</body>
+    </script>
+
+    
+    <a href="index2.html" class="EDASI">EDASI </a>
+    
+</body>
+</html>
